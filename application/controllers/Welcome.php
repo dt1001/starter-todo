@@ -21,6 +21,7 @@ class Welcome extends Application
 	{
                 $this->data['pagetitle'] = 'TEAM 4!!';
 		$this->data['pagebody'] = 'homepage';
+                
                 $tasks = $this->tasks->all();   // get all the tasks
                 // count how many are not done
                 $count = 0;
@@ -29,6 +30,17 @@ class Welcome extends Application
                 }
                 // and save that as a view parameter
                 $this->data['remaining_tasks'] = $count;
+                
+                // process the array in reverse, until we have five
+                $count = 0;
+                foreach(array_reverse($tasks) as $task) {
+                    $task->priority = $this->priorities->get($task->priority)->name;
+                    $display_tasks[] = (array) $task;
+                    $count++;
+                    if ($count >= 5) break;
+                }
+                $this->data['display_tasks'] = $display_tasks;
+
 		$this->render(); 
 	}
 

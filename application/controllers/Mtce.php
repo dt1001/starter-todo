@@ -1,6 +1,6 @@
 <?php
 
-defineed('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mtce extends Application
 {
@@ -10,15 +10,16 @@ class Mtce extends Application
         
         foreach ($tasks as $task) {
             if (!empty($task->status)) {
-                $task->status = $this->statues->get($task->status)->name;
+                $task->status = $this->statuses->get($task->status)->name;
             }
         }
             
+        $result = '';
         foreach ($tasks as $task) {
-            $converted[] = (array) $task;
+            $result .= $this->parser->parse('oneitem', (array)$task, true);
         }
         
-        $this->data['display_tasks'] = $converted;
+        $this->data['display_tasks'] = $result;
         $this->data['pagebody'] = 'itemlist';
         $this->render();
     }

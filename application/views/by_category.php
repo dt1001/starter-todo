@@ -1,5 +1,5 @@
 <h3>Tasks by Category</h3>
-<form method='POST' action='{completer}'>
+<form method='POST' action='{complete}'>
     <table class="table">
         <tr>
             <th>Id</th>

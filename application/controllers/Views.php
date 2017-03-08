@@ -13,7 +13,8 @@ class Views extends Application {
     }
     
     function makePrioritizedPanel($tasks) {
-        $parms = ['display_tasks' => []];
+        $role = $this->session->userdata('userrole');
+        $parms['completer'] = ($role == ROLE_OWNER) ? '/views/complete' : '#';
         return $this->parser->parse('by_priority', $parms, true);
     }
     

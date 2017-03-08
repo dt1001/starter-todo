@@ -38,7 +38,7 @@ class Views extends Application {
     }
 
     function makeCategorizedPanel($tasks) {
-        $parms = ['display_tasks' => []];
+        $parms = ['display_tasks' => $this->tasks->getCategorizedTasks()];
         return $this->parser->parse('by_category', $parms, true);
     }
 
